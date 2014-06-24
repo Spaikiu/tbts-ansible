@@ -16,3 +16,8 @@
       with_file:
           - ssh_pubkeys/boklm
 
+    - name: add root authorized_keys
+      authorized_key: user=root key="{{ item }}"
+      with_file:
+          - ssh_pubkeys/boklm
+
