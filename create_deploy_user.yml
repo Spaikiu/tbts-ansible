@@ -1,0 +1,18 @@
+---
+- hosts: all
+  vars:
+      deploy_user: deploy
+  tasks:
+    - name: create {{ deploy_user }} user
+      user: name={{ deploy_user }} home=/home/{{ deploy_user }}
+
+    - name: add {{ deploy_user }} to sudoers
+      copy: |
+           dest=/etc/sudoers.d/{{ deploy_user }} owner=root group=root
+           mode=0600 content="{{ deploy_user }} ALL=(ALL) NOPASSWD: ALL"
+    
+    - name: add {{ deploy_user }} authorized_keys
+      authorized_key: user={{ deploy_user }} key="{{ item }}"
+      with_file:
+          - ssh_pubkeys/boklm
+
