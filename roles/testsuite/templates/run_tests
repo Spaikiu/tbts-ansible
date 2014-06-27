@@ -1,0 +1,7 @@
+#!/bin/sh
+cd /home/{{ testsuite_user }}/testsuite
+{% for opt in testsuite_options %}
+{% if opt %}
+./tbb-testsuite {{ opt }}
+{% endif %}
+{% endfor %}
