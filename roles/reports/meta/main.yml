@@ -1,0 +1,4 @@
+---
+dependencies:
+    - role: testsuite
+      testsuite_user: '{{ reports_user }}'

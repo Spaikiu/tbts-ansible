@@ -1,0 +1,45 @@
+---
+
+- name: update authorized_keys
+  sudo: yes
+  sudo_user: "{{ reports_user }}"
+  authorized_key: user={{ reports_user }} key="{{ item }}"
+                  key_options='command="/home/{{ reports_user }}/testsuite/tbb-testsuite --action receive_report --config=receive-reports",no-X11-forwarding,no-agent-forwarding,no-port-forwarding'
+  with_items: reports_keys
+
+- name: install web server
+  sudo: yes
+  yum: name=httpd state=present
+
+- name: start web server
+  sudo: yes
+  service: name=httpd.service enabled=yes state=started
+
+- name: check if firewalld is running
+  sudo: yes
+  shell: firewall-cmd --state || true
+  register: fwrun
+
+- name: add http to the firewall
+  sudo: yes
+  firewalld: service=http permanent=false state=enabled zone=public
+  when: fwrun.stdout == "running"
+
+- name: add httpd configuration
+  sudo: yes
+  template: src=httpd_reports.conf
+            dest=/etc/httpd/conf.d/reports_{{ reports_user }}.conf
+  notify:
+      - restart httpd
+
+- name: set selinux context on reports directory
+  sudo: yes
+  file: path="/home/{{ reports_user }}/testsuite/reports" state=directory
+        recurse=yes setype=public_content_t
+  when: ansible_selinux.status == "enabled"
+
+- name: allow httpd to access home directories
+  sudo: yes
+  seboolean: name=httpd_enable_homedirs state=yes persistent=yes
+  when: ansible_selinux.status == "enabled"
+
