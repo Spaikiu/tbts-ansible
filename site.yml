@@ -1,0 +1,15 @@
+- hosts: testsuite
+  roles:
+      - testsuite-installdeps
+
+- hosts: testsuite
+  roles:
+      - role: testsuite
+        testsuite_user: tbts
+#        testsuite_minute: "*/15"
+        testsuite_options:
+            - "--config=linus-nightly {{ testsuite_upload_to }}"
+            - "--config=release {{ testsuite_upload_to }}"
+            - "{% if virustotal %}--config=release-virustotal {{ testsuite_upload_to }}{% endif %}"
+            - "{% if virustotal %}--config=linus-nightly-virustotal {{ testsuite_upload_to }}{% endif %}"
+
