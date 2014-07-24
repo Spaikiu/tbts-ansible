@@ -20,4 +20,5 @@
         reports_config: receive-reports
         reports_keys:
             - "{{ lookup('file', 'ssh_pubkeys/fedora20-tbb-test') }}"
+            - "{{ lookup('file', 'ssh_pubkeys/fedora20-firefoxbuilder') }}"
 
