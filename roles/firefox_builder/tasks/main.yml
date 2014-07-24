@@ -11,3 +11,10 @@
   sudo: yes
   command: yum-builddep -y {{ ansible_env.HOME }}/firefox.spec
 
+- name: install other firefox build dependencies
+  sudo: yes
+  yum: name={{ item }} state=present
+  with_items:
+      - yasm
+      - gstreamer-devel
+      - gstreamer-plugins-base-devel
