@@ -1,0 +1,13 @@
+---
+
+- name: install yum-utils
+  sudo: yes
+  yum: name=yum-utils state=present
+
+- name: copy firefox.spec
+  copy: dest={{ ansible_env.HOME }}/firefox.spec src=firefox.spec
+
+- name: install firefox build dependencies
+  sudo: yes
+  command: yum-builddep -y {{ ansible_env.HOME }}/firefox.spec
+
