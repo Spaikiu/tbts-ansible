@@ -1,0 +1,13 @@
+- hosts: tbunits
+  roles:
+      - testsuite-installdeps
+
+- hosts: tbunits
+  roles:
+      - role: firefox_builder
+      - role: testsuite
+        testsuite_user: tbuts
+        testsuite_minute: "*/10"
+        testsuite_options:
+            - "--config=browser-unit {{ testsuite_upload_to }}"
+
