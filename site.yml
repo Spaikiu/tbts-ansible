@@ -1,6 +1,7 @@
 - hosts: testsuite
   roles:
-      - testsuite-installdeps
+      - role: testsuite-installdeps
+        testsuite_deps: X
 
 - hosts: testsuite
   roles:

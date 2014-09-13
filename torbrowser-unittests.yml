@@ -1,6 +1,7 @@
 - hosts: tbunits
   roles:
-      - testsuite-installdeps
+      - role: testsuite-installdeps
+        testsuite_deps: X
 
 - hosts: tbunits
   roles:
