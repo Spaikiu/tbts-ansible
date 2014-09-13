@@ -10,5 +10,5 @@
 
 - name: install testsuite dependencies
   sudo: yes
-  command: "{{ ansible_env.HOME }}/testsuite/install-deps"
+  command: "{{ ansible_env.HOME }}/testsuite/install-deps {{ testsuite_deps }}"
 
