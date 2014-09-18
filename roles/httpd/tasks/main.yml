@@ -1,0 +1,18 @@
+---
+- name: install web server
+  sudo: yes
+  yum: name=httpd state=present
+
+- name: start web server
+  sudo: yes
+  service: name=httpd.service enabled=yes state=started
+
+- name: check if firewalld is running
+  sudo: yes
+  shell: firewall-cmd --state || true
+  register: fwrun
+
+- name: add http to the firewall
+  sudo: yes
+  firewalld: service=http permanent=false state=enabled zone=public
+  when: fwrun.stdout == "running"
