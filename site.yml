@@ -1,3 +1,7 @@
+- hosts: centos6
+  roles:
+      - epel
+
 - hosts: testsuite
   roles:
       - role: testsuite-installdeps

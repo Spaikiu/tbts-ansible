@@ -3,6 +3,9 @@ centos-tbb-test ansible_ssh_user=deploy ansible_ssh_host=93.95.228.161
 debianx86-tbb-test ansible_ssh_user=deploy ansible_ssh_host=93.95.228.165
 ubuntu1204LTS-32bit-tbb-test ansible_ssh_user=deploy ansible_ssh_host=93.95.228.160
 
+[centos6]
+centos-tbb-test
+
 [testsuite]
 fedora20-tbb-test
 
