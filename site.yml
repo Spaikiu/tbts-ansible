@@ -6,9 +6,6 @@
   roles:
       - role: testsuite-installdeps
         testsuite_deps: X
-
-- hosts: testsuite
-  roles:
       - role: testsuite
         testsuite_user: tbts
 #        testsuite_minute: "*/15"
