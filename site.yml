@@ -2,3 +2,4 @@
 - include: centos6.yml
 - include: testsuite.yml
 - include: reports.yml
+- include: torbrowser-unittests.yml
