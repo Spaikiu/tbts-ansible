@@ -1,0 +1,9 @@
+- hosts: reports
+  roles:
+      - role: reports
+        reports_user: tbtsreports
+        reports_config: receive-reports
+        reports_keys:
+            - "{{ lookup('file', 'ssh_pubkeys/fedora20-tbb-test') }}"
+            - "{{ lookup('file', 'ssh_pubkeys/fedora20-firefoxbuilder') }}"
+            - "{{ lookup('file', 'ssh_pubkeys/fedora20-tbbtests.mars-attacks.org') }}"

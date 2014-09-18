@@ -1,27 +1,4 @@
-- hosts: centos6
-  roles:
-      - epel
-
-- hosts: testsuite
-  roles:
-      - role: testsuite-installdeps
-        testsuite_deps: X
-      - role: testsuite
-        testsuite_user: tbts
-#        testsuite_minute: "*/15"
-        testsuite_options:
-            - "--config=linus-nightly {{ testsuite_upload_to }}"
-            - "--config=release {{ testsuite_upload_to }}"
-            - "{% if virustotal %}--config=release-virustotal {{ testsuite_upload_to }}{% endif %}"
-            - "{% if virustotal %}--config=linus-nightly-virustotal {{ testsuite_upload_to }}{% endif %}"
-
-- hosts: reports
-  roles:
-      - role: reports
-        reports_user: tbtsreports
-        reports_config: receive-reports
-        reports_keys:
-            - "{{ lookup('file', 'ssh_pubkeys/fedora20-tbb-test') }}"
-            - "{{ lookup('file', 'ssh_pubkeys/fedora20-firefoxbuilder') }}"
-            - "{{ lookup('file', 'ssh_pubkeys/fedora20-tbbtests.mars-attacks.org') }}"
-
+---
+- include: centos6.yml
+- include: testsuite.yml
+- include: reports.yml
