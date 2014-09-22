@@ -1,0 +1,3 @@
+- hosts: testsuite-data
+  roles:
+      - role: testsuite-data

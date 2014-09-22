@@ -1,0 +1,23 @@
+---
+
+- name: create testsuite data user
+  user: name={{ data_user }} comment="Tor Browser Test Suite Data"
+        createhome=yes home=/home/{{ data_user }}
+  sudo: yes
+
+- name: change permissions on home directory
+  sudo: yes
+  file: path=/home/{{ data_user }} state=directory mode=0711
+
+- name: clone test suite in testsuite home
+  sudo: yes
+  sudo_user: "{{ data_user }}"
+  git: repo={{ testsuite_git_url }} dest=/home/{{ data_user }}/testsuite
+       version={{ testsuite_git_commit }}
+
+- name: add httpd configuration
+  sudo: yes
+  template: src=httpd_test-data.conf
+            dest=/etc/httpd/conf.d/{{ data_user }}.conf
+  notify:
+      - restart httpd
