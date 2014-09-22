@@ -3,3 +3,4 @@
 - include: testsuite.yml
 - include: reports.yml
 - include: torbrowser-unittests.yml
+- include: testsuite-data.yml
