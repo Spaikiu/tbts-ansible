@@ -5,7 +5,7 @@
 
 - name: start web server
   sudo: yes
-  service: name=httpd.service enabled=yes state=started
+  service: name={{ httpd_service }} enabled=yes state=started
 
 - name: check if firewalld is running
   sudo: yes

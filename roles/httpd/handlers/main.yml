@@ -1,4 +1,4 @@
 ---
 - name: restart httpd
   sudo: yes
-  service: name=httpd.service state=restarted
+  service: name={{ httpd_service }} state=restarted
