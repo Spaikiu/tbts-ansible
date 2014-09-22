@@ -15,3 +15,6 @@ fedora20-firefoxbuilder ansible_ssh_user=deploy
 [reports]
 fedora20-tbb-test
 
+[testsuite-data]
+centos-tbb-test
+
