@@ -18,3 +18,6 @@ fedora20-tbb-test
 [testsuite-data]
 centos-tbb-test
 
+[virustotal]
+debianx86-tbb-test
+
