@@ -4,3 +4,4 @@
 - include: reports.yml
 - include: torbrowser-unittests.yml
 - include: testsuite-data.yml
+- include: virustotal.yml
