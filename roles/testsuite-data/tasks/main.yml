@@ -15,6 +15,12 @@
   git: repo={{ testsuite_git_url }} dest=/home/{{ data_user }}/testsuite
        version={{ testsuite_git_commit }}
 
+- name: create self signed SSL cert
+  sudo: yes
+  command: openssl req -new -nodes -x509 -subj "/CN={{ data_hostname }}" -days 10000 -keyout /etc/pki/tls/private/{{ data_hostname }}.key -out /etc/ssl/certs/{{ data_hostname }}.cert -extensions v3_ca
+  args:
+      creates: /etc/ssl/certs/{{ data_hostname }}.cert
+
 - name: add httpd configuration
   sudo: yes
   template: src=httpd_test-data.conf
