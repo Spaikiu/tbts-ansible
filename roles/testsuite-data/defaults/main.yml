@@ -1,3 +1,4 @@
 ---
 data_user: testsuite-data
 data_alias: test-data
+data_hostname: test-data.tbb.torproject.org
