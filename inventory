@@ -21,3 +21,6 @@ centos-tbb-test
 [virustotal]
 debianx86-tbb-test
 
+[torbrowser-hardening]
+debianx86-tbb-test
+

@@ -1,0 +1,13 @@
+- hosts: torbrowser-hardening
+  roles:
+      - role: testsuite-installdeps
+        testsuite_deps: hardening
+
+- hosts: torbrowser-hardening
+  roles:
+      - role: testsuite
+        testsuite_user: tbts-tbhardening
+        testsuite_minute: "*/10"
+        testsuite_options:
+            - "--config=release-browserbundle_hardening {{ testsuite_upload_to }}"
+
