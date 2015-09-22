@@ -1,5 +1,5 @@
 ---
 testsuite_git_url: https://git.torproject.org/boklm/tor-browser-bundle-testsuite.git
-testsuite_git_commit: aa75310e05305402ceaa39886e481261161eefd3
+testsuite_git_commit: b0c363cf0ffaff87a29fb7823dc875a111095ace
 testsuite_upload_to: --upload-to=tbtsreports@93.95.228.164
 virustotal: 0
