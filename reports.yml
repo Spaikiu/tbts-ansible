@@ -1,5 +1,9 @@
 - hosts: reports
   roles:
+      - role: testsuite-installdeps
+
+- hosts: reports
+  roles:
       - role: reports
         reports_user: tbtsreports
         reports_config: receive-reports
