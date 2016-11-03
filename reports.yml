@@ -8,9 +8,6 @@
         reports_user: tbtsreports
         reports_config: receive-reports
         reports_keys:
-            - "{{ lookup('file', 'ssh_pubkeys/fedora20-tbb-test') }}"
-            - "{{ lookup('file', 'ssh_pubkeys/fedora20-firefoxbuilder') }}"
             - "{{ lookup('file', 'ssh_pubkeys/fedora20-tbbtests.mars-attacks.org') }}"
-            - "{{ lookup('file', 'ssh_pubkeys/debianx86-tbb-test_virustotal') }}"
             - "{{ lookup('file', 'ssh_pubkeys/windows-tbbtests') }}"
             - "{{ lookup('file', 'ssh_pubkeys/osx-tests') }}"
