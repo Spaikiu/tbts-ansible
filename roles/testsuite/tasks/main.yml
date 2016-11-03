@@ -3,29 +3,29 @@
 - name: create testsuite user
   user: name={{ testsuite_user }} comment="Tor Browser Test Suite"
         generate_ssh_key=yes createhome=yes home=/home/{{ testsuite_user }}
-  sudo: yes
+  become: yes
 
 - name: clone test suite in testsuite home
-  sudo: yes
-  sudo_user: "{{ testsuite_user }}"
+  become: yes
+  become_user: "{{ testsuite_user }}"
   git: repo={{ testsuite_git_url }} dest=/home/{{ testsuite_user }}/testsuite
        version={{ testsuite_git_commit }}
 
 - name: setup testsuite virtualenv
-  sudo: yes
-  sudo_user: "{{ testsuite_user }}"
+  become: yes
+  become_user: "{{ testsuite_user }}"
   command: /home/{{ testsuite_user }}/testsuite/setup-virtualenv
            creates=/home/{{ testsuite_user }}/testsuite/virtualenv
 
 - name: create run_tests script
-  sudo: yes
-  sudo_user: "{{ testsuite_user }}"
+  become: yes
+  become_user: "{{ testsuite_user }}"
   template: src=run_tests dest=/home/{{ testsuite_user }}/run_tests mode=0700
   when: testsuite_options is defined
 
 - name: add cron for run_tests
-  sudo: yes
-  sudo_user: "{{ testsuite_user }}"
+  become: yes
+  become_user: "{{ testsuite_user }}"
   when: testsuite_options is defined and testsuite_minute is defined
   cron: name="run tests" minute="{{ testsuite_minute }}"
         job="/home/{{ testsuite_user }}/run_tests"

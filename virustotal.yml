@@ -11,8 +11,8 @@
             - "--config=linus-nightly-virustotal {{ testsuite_upload_to }}"
   tasks:
       - name: copy virustotal api key
-        sudo: yes
-        sudo_user: '{{ testsuite_user }}'
+        become: yes
+        become_user: '{{ testsuite_user }}'
         copy: content={{ virustotal_apikey }} dest=/home/{{ testsuite_user }}/.virustotal.api-key
               owner={{ testsuite_user }} mode=0600
         when: virustotal_apikey is defined

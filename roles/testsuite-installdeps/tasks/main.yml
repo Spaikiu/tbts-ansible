@@ -1,14 +1,14 @@
 ---
 - name: install git
-  sudo: yes
+  become: yes
   action: "{{ ansible_pkg_mgr }} name=git state=present"
 
 - name: clone test suite in deploy home
-  sudo: no
+  become: no
   git: repo={{ testsuite_git_url }} dest={{ ansible_env.HOME }}/testsuite
        version={{ testsuite_git_commit }}
 
 - name: install testsuite dependencies
-  sudo: yes
+  become: yes
   command: "{{ ansible_env.HOME }}/testsuite/install-deps {{ testsuite_deps }}"
 

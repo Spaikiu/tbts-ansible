@@ -1,14 +1,14 @@
 ---
 
 - name: update authorized_keys
-  sudo: yes
-  sudo_user: "{{ reports_user }}"
+  become: yes
+  become_user: "{{ reports_user }}"
   authorized_key: user={{ reports_user }} key="{{ item }}"
                   key_options='command="/home/{{ reports_user }}/testsuite/tbb-testsuite --action receive_report --config=receive-reports",no-X11-forwarding,no-agent-forwarding,no-port-forwarding'
   with_items: reports_keys
 
 - name: add httpd configuration
-  sudo: yes
+  become: yes
   template: src=httpd_reports.conf
             dest=/etc/apache2/sites-enabled/reports_{{ reports_user }}.conf
   notify:

@@ -2,21 +2,21 @@
 
   tasks:
    - name: install ntp
-     sudo: yes
+     become: yes
      action: "{{ ansible_pkg_mgr }} name=ntp state=present"
    
    - name: enable ntp service
-     sudo: yes
+     become: yes
      service: name={% if ansible_os_family == 'RedHat' %}ntpd{% else %}ntp{% endif %}
               state=started enabled=yes
    
    - name: install yum-cron
-     sudo: yes
+     become: yes
      yum: name=yum-cron state=present
      when: ansible_os_family == 'RedHat'
    
    - name: install cron-apt
-     sudo: yes
+     become: yes
      apt: name=cron-apt state=present
      when: ansible_os_family == 'Debian'
 
