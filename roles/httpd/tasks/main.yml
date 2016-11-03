@@ -1,27 +1,13 @@
 ---
 - name: install web server
   sudo: yes
-  yum: name=httpd state=present
+  apt: name=apache2 state=present
 
 - name: install mod_ssl
   sudo: yes
-  yum: name=mod_ssl state=present
+  apt: name=libapache2-mod-nss state=present
 
 - name: start web server
   sudo: yes
   service: name={{ httpd_service }} enabled=yes state=started
 
-- name: check if firewalld is running
-  sudo: yes
-  shell: firewall-cmd --state || true
-  register: fwrun
-
-- name: add http to the firewall
-  sudo: yes
-  firewalld: service=http permanent=false state=enabled zone=public
-  when: fwrun.stdout == "running"
-
-- name: add https to the firewall
-  sudo: yes
-  firewalld: service=https permanent=false state=enabled zone=public
-  when: fwrun.stdout == "running"

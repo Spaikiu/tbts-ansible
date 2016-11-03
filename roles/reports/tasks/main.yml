@@ -10,18 +10,7 @@
 - name: add httpd configuration
   sudo: yes
   template: src=httpd_reports.conf
-            dest=/etc/httpd/conf.d/reports_{{ reports_user }}.conf
+            dest=/etc/apache2/sites-enabled/reports_{{ reports_user }}.conf
   notify:
       - restart httpd
-
-- name: set selinux context on reports directory
-  sudo: yes
-  file: path="/home/{{ reports_user }}/testsuite/reports" state=directory
-        recurse=yes setype=public_content_t
-  when: ansible_selinux.status == "enabled"
-
-- name: allow httpd to access home directories
-  sudo: yes
-  seboolean: name=httpd_enable_homedirs state=yes persistent=yes
-  when: ansible_selinux.status == "enabled"
 
